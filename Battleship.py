@@ -82,9 +82,11 @@ def set_difficulty():
         elif response == "hard":
             difficulty[0][0] = difficulty[3][0]
             grid_size = difficulty[3][1]
+            set_window_size()
             loop = False
         else:
             print("Invalid response")
+    set_up()
 
 def set_up():
     global num_rows
@@ -94,7 +96,13 @@ def set_up():
     global ships
     global player_ships
     global enemy_ships
+    global game
+    global player_wins
+    global enemy_wins
     #Set up number of columns
+    print("-----------------------------------------------------------------------------------------------------------------------")
+    print("  Game: " + str(game) + "                                                                                       Wins:   P: " + str(player_wins) + "   E: " + str(enemy_wins))
+    print("-----------------------------------------------------------------------------------------------------------------------")
     for i in range(0, grid_size):
         space = "  "
         if i >= 9:
@@ -114,6 +122,7 @@ def set_up():
         deploy_ship(ships[i], enemy_ships)
     set_point_status(player_ships)
     set_point_status(enemy_ships)
+    take_turn()
 
 #ships = [patrol_boat, destroyer, submarine, battleship, aircraft_carrier]
 def deploy_ship(ship, current_player):
@@ -477,9 +486,14 @@ def check_ship_status(player, ship, ship_num, guesses): #Player or enemy ships, 
                 player_wins += 1
             else:
                 enemy_wins += 1
+            play_again()
 
 def set_window_size():
-    os.system('mode con: cols=120 lines=45')
+    global difficulty
+    if difficulty[0][0] == "hard":
+        os.system('mode con: cols=120 lines=90')
+    else:
+        os.system('mode con: cols=120 lines=45')
 
 def enemy_guess():
     global enemy_guesses
@@ -543,9 +557,16 @@ def enemy_guess():
 
 def version():
     print("-----------------------------------------------------------------------------------------------------------------------")
-    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.00")
+    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.10")
     print("-----------------------------------------------------------------------------------------------------------------------")
         
+def rules():
+    print("-------------------------")
+    print("   Rules               /")
+    print("-----------------------")
+    print("Each player takes turns guessing the location of the other player's 5 ships (one point at a time)")
+    print("The first player to sink all 5 of their opponent's ships wins")
+
 def take_turn():
     global turn
     global game_over
@@ -560,10 +581,105 @@ def take_turn():
             enemy_guess()
         turn += 1
 
+def reset_game():
+    global game_over
+    global game
+    global turn
+    global player_ships_alive
+    global enemy_ships_alive
+    global player_board
+    global enemy_board
+    global player_guesses
+    global enemy_guesses
+    global player_ships
+    global enemy_ships
+    global nums
+    global A
+    global B
+    global C
+    global D
+    global E
+    global F
+    global G
+    global H
+    global I
+    global J
+    global K
+    global L
+    global M
+    global N
+    global O
+    global P
+    global Q
+    global R
+    global S
+    global T
+    global U
+    global V
+    global W
+    global X
+    global Y
+    global Z
+    global num_rows
+
+    game += 1
+    turn = 1
+    player_ships_alive = 5
+    enemy_ships_alive = 5
+    nums = ["   "]
+    A=["A "]
+    B=["B "]
+    C=["C "]
+    D=["D "]
+    E=["E "]
+    F=["F "]
+    G=["G "]
+    H=["H "]
+    I=["I "]
+    J=["J "]
+    K=["K "]
+    L=["L "]
+    M=["M "]
+    N=["N "]
+    O=["O "]
+    P=["P "]
+    Q=["Q "]
+    R=["R "]
+    S=["S "]
+    T=["T "]
+    U=["U "]
+    V=["V "]
+    W=["W "]
+    X=["X "]
+    Y=["Y "]
+    Z=["Z "]
+    num_rows = [A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
+    player_board =[]
+    enemy_board = []
+    player_guesses = []
+    enemy_guesses = []
+    player_ships = ["player"]
+    enemy_ships = ["enemy"]
+    game_over = False
+    set_difficulty()
+
+def play_again():
+    loop = True
+    while loop == True:
+        response = input("Play again? (Yes/No) ")
+        response.lower()
+        if response == "yes":
+            reset_game()
+            loop = False
+        elif response == "no":
+            print("Thanks for playing!")
+            loop = False
+        else:
+            print("Invalid response")
+
 set_window_size()
 version()
+rules()
 set_difficulty()
-set_up()
-take_turn()
 
 
