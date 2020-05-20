@@ -556,7 +556,7 @@ def enemy_guess():
 
 def version():
     print("-----------------------------------------------------------------------------------------------------------------------")
-    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.11")
+    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.12")
     print("-----------------------------------------------------------------------------------------------------------------------")
         
 def rules():
@@ -565,6 +565,10 @@ def rules():
     print("-----------------------")
     print("Each player takes turns guessing the location of the other player's 5 ships (one point at a time)")
     print("The first player to sink all 5 of their opponent's ships wins")
+    print("[ ] = Blank")
+    print("[X] = Hit")
+    print("[O] = Miss")
+    print("[*] = Your ships")
 
 def take_turn():
     global turn
