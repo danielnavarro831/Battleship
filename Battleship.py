@@ -70,16 +70,15 @@ def set_difficulty():
     loop = True
     while loop == True:
         response = input("Choose difficult: (Easy, Medium, Hard) " )
-        response.lower()
-        if response == "easy":
+        if (response.lower()) == "easy":
             difficulty[0][0] = difficulty[1][0]
             grid_size = difficulty[1][1]
             loop = False
-        elif response == "medium":
+        elif (response.lower()) == "medium":
             difficulty[0][0] = difficulty[2][0]
             grid_size = difficulty[2][1]
             loop = False
-        elif response == "hard":
+        elif (response.lower()) == "hard":
             difficulty[0][0] = difficulty[3][0]
             grid_size = difficulty[3][1]
             set_window_size()
@@ -501,7 +500,7 @@ def enemy_guess():
     unsunken_ship = False
     known_hits = []
     fire_at = []
-    for a in range(0, len(enemy_guesses)):
+    for a in range(0, len(enemy_guesses)): #Check if any guesses were hits
         if enemy_guesses[a][-1] == "hit":
             unsunken_ship = True
             known_hit = [enemy_guesses[a][0], enemy_guesses[a][1]]
@@ -557,7 +556,7 @@ def enemy_guess():
 
 def version():
     print("-----------------------------------------------------------------------------------------------------------------------")
-    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.10")
+    print("                                        Battleship - Code by Daniel Navarro                                   ver: 1.11")
     print("-----------------------------------------------------------------------------------------------------------------------")
         
 def rules():
@@ -667,11 +666,10 @@ def play_again():
     loop = True
     while loop == True:
         response = input("Play again? (Yes/No) ")
-        response.lower()
-        if response == "yes":
+        if (response.lower()) == "yes":
             reset_game()
             loop = False
-        elif response == "no":
+        elif (response.lower()) == "no":
             print("Thanks for playing!")
             loop = False
         else:
